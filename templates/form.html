@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARK</title>
+    <style>
+        /* Stark Theme Setup - Yellow & Dark */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #000000;
+            padding: 40px;
+            /* border-radius: 20px; */
+            /* border: 1px solid #333; */
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #a0a0a0;
+            font-size: 13px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: #1c1c1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ccff00;
+            outline: none;
+            background-color: #2c2c2e;
+        }
+
+        /* Checkbox/Radio Styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #ccff00;
+            margin: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ccff00;
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(204, 255, 0, 0.3);
+            background-color: #b3e600;
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .helper-text {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+
+
+        .helper-link {
+            color: #ccff00;
+            text-decoration: none;
+            border-bottom: 1px dashed #ccff00;
+            transition: color 0.2s;
+        }
+
+        .helper-link:hover {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #333;
+            margin: 25px 0;
+        }
+
+        .mandatory {
+            color: #ff4b4b;
+            font-size: 12px;
+        }
+
+        .source-footer {
+            text-align: center;
+            font-size: 11px;
+            color: #444;
+            margin-top: 20px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .source-footer:hover {
+            color: #ccff00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="/submit" method="POST">
+            <h2>STARK 🚀</h2>
+
+
+            <!-- Job Mode Selection -->
+            <div class="form-group">
+                <label>Job Search Mode <span class="mandatory">*</span></label>
+                <div class="checkbox-group">
+                    <input type="radio" id="mode_fresher" name="job_mode" value="Fresher" checked>
+                    <label for="mode_fresher">Fresher (Entry Level)</label>
+
+                    <input type="radio" id="mode_experienced" name="job_mode" value="Experienced"
+                        style="margin-left: 15px;">
+                    <label for="mode_experienced">Experienced</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>LinkedIn Email / Username <span class="mandatory">*</span></label>
+                <input type="text" name="user_id" placeholder="Email / Username" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password <span class="mandatory">*</span></label>
+                <input type="password" name="password" placeholder="●●●●●●●●" required>
+            </div>
+
+            <div class="form-group">
+                <label>Target Roles <span class="mandatory">*</span></label>
+                <input type="text" name="roles" placeholder="Eg. Data Analyst,Python Developer..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Gemini API Key (Optional - for AI Analysis)</label>
+                <input type="text" name="api_key" placeholder="Enter Gemini API Key">
+            </div>
+
+
+
+            <div class="form-group" id="experience_section" style="display: none; gap: 15px;">
+                <div style="flex: 1;">
+                    <label>Years Exp</label>
+                    <input type="number" name="years" placeholder="Years" min="0" value="0">
+                </div>
+                <div style="flex: 1;">
+                    <label>Months Exp</label>
+                    <input type="number" name="months" placeholder="Months" min="0" max="11" value="0">
+                </div>
+            </div>
+
+            <div class="form-group" style="display: none;">
+                <label>Profile Links (Optional)</label>
+                <input type="text" name="links" placeholder="Reserved for Future Implementation">
+            </div>
+
+            <script>
+                const modeFresher = document.getElementById('mode_fresher');
+                const modeExperienced = document.getElementById('mode_experienced');
+                const expSection = document.getElementById('experience_section');
+
+                function toggleExperience() {
+                    if (modeExperienced.checked) {
+                        expSection.style.display = 'flex';
+                    } else {
+                        expSection.style.display = 'none';
+                    }
+                }
+
+                modeFresher.addEventListener('change', toggleExperience);
+                modeExperienced.addEventListener('change', toggleExperience);
+
+                // Init
+                toggleExperience();
+            </script>
+
+            <div class="divider"></div>
+
+
+
+            <div class="mandatory">
+                <p>* Mandatory fields</p>
+            </div>
+
+            <button type="submit">START</button>
+
+        </form>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

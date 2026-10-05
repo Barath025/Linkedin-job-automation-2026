@@ -1,0 +1,15 @@
+# Sensitive personal credentials
+user_config.txt
+
+# Chrome browser session & cookies
+chrome_profile/
+
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Duplicate unzipped folder
+LINKEDIN-AUTOMATION/
